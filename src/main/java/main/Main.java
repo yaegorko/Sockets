@@ -1,5 +1,7 @@
 package main;
-
+/*
+https://coderanch.com/t/622257/java/Error-java-net-SocketException-Connection
+*/
 import servers.MyServerSocket;
 
 

@@ -22,26 +22,19 @@ public class MySocket extends Thread {
 
     @Override
     public void run() {
-        try
-           {
+        try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             String s;
             while (!(s = reader.readLine()).equals("Bue.")) {
+                System.out.println(s);
                 writer.write(s);
                 writer.flush();
                 i++;
             }
-
         } catch (IOException e) {
-            System.out.println("Сокет отработал " + i);
-            System.out.println("И еще ошибка");
+            System.out.println("Сокет отработал " + i + " раз");
             e.printStackTrace();
         }
-//        try {
-//            socket.close();
-//        } catch (IOException e) {
-//            System.out.println("ошибка при закрытии");
-//        }
     }
 }

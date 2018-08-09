@@ -8,8 +8,7 @@ public class MySocket extends Thread {
 
     ServerSocket serverSocket;
     Socket socket;
-    int i = 1;
-
+    int i = 0;
 
     public MySocket(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
@@ -26,14 +25,21 @@ public class MySocket extends Thread {
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             String s;
-            while (!(s = reader.readLine()).equals("Bue.")) {
-                System.out.println(s);
+            while (true) {
+                s = reader.readLine();
                 writer.write(s);
+                writer.newLine();
                 writer.flush();
                 i++;
+                if (s.equals("Bue.")) {
+                    System.out.println(s);
+                    socket.close();
+                    break;
+                }
+                System.out.println(s);
             }
         } catch (IOException e) {
-            System.out.println("Сокет отработал " + i + " раз");
+            System.out.println("Сокет отработал " + i + " раз и сломался");
             e.printStackTrace();
         }
     }

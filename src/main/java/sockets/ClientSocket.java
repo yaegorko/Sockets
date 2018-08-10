@@ -1,12 +1,13 @@
-package main;
+package sockets;
 
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientSocket {
-    public static void main(String[] args) {
+public class ClientSocket implements Runnable {
+    @Override
+    public void run() {
         String s;
         try(Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress("127.0.0.1", 5060), 3000);
@@ -22,9 +23,9 @@ public class ClientSocket {
             while (true) {
                 s = reader.readLine();
                 System.out.println(s);
-                 if (s.equals("Bue.")) {
-                     socket.close();
-                 }
+                if (s.equals("Bue.")) {
+                    socket.close();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

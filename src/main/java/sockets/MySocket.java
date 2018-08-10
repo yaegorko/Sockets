@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class MySocket extends Thread {
+public class MySocket extends Thread implements Runnable {
 
     ServerSocket serverSocket;
     Socket socket;
@@ -17,6 +17,10 @@ public class MySocket extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public MySocket(Socket socket) {
+        this.socket = socket;
     }
 
     @Override
